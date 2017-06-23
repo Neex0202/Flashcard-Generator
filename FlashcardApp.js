@@ -1,5 +1,3 @@
-
-
 var inquirer = require("inquirer");
 
 var BasicCard = require("./BasicCard.js");
@@ -11,53 +9,98 @@ var ClozeCard = require("./ClozeCard.js");
 
 var cardOne = new BasicCard("How many bones compose the human body?", "206");
 var cardTwo = new BasicCard("The fall of the Western Roman Empire is attributed to this year", "What is 476 AD");
-var cardThree = new BasicCard("Question ", "Answer");
-var cardFour = new BasicCard("Question ", "Answer");
-var cardFive = new BasicCard("Question ", "Answer");
+var cardThree = new BasicCard("The legendary basketball player, Michael Jordan, was this number pick in the '84 draft", "What is the 3rd pick");
+var cardFour = new BasicCard("Pound for pound, these insects are considered the strongest animals on Earth", "What are beetles");
+// var cardFive = new BasicCard("The  ", "Answer");
 
 
-// Log Respective card information to Test
+// Log Respective card information to Test -WORKING!
+// console.log(cardOne.front);
+// console.log(cardOne.back);
 
-console.log(cardOne.front);
-console.log(cardOne.back);
+var flashCardBasicOne = function() {
 
-// Use recursion and inquierer to display card fronts and back.
+    inquirer.prompt([{
+        name: "cardOne",
+        message: cardOne.front
+    }]).then(function(answers) {
 
-var count = 0;
+        console.log(cardOne.back);
 
-var flashCardBasic = function(){
+        flashCardBasicTwo();
+    });
 
-	if(count < 3){
-
-		inquirer.prompt([
-		{
-			name: "cardOne",
-			message: cardOne.front
-		}, {
-			name: "cardTwo",
-			message: cardTwo.front
-		}
-			]).then(function(answers){
-
-				console.log(cardOne.back);
-
-				count ++;
-
-				flashCardBasic();
-			});
-
-	}
-	else{
-		console.log("Cards_Finished");
-	}
 };
 
-flashCardBasic();
+var flashCardBasicTwo = function() {
 
-// Creaet instances from ClozeCard Constructor && set parameters
+    inquirer.prompt([{
+        name: "cardTwo",
+        message: cardTwo.front
+    }]).then(function(answers) {
+
+        console.log(cardTwo.back);
+
+        flashCardBasicThree();
+    });
+
+};
+
+var flashCardBasicThree = function() {
+
+    inquirer.prompt([{
+        name: "cardThree",
+        message: cardThree.front
+    }]).then(function(answers) {
+
+        console.log(cardThree.back);
+
+        flashCardBasicFour();
+    });
+
+};
+
+var flashCardBasicFour = function() {
+
+    inquirer.prompt([{
+        name: "cardFour",
+        message: cardFour.front
+    }]).then(function(answers) {
+
+        console.log(cardFour.back);
+
+        // flashCardBasicFive();
+    });
+
+};
 
 
+// var flashCardBasicFive = function() {
 
+//     inquirer.prompt([{
+//         name: "cardFive",
+//         message: cardFive.front
+//     }]).then(function(answers) {
+
+//         console.log(cardFive.back);
+
+//         // flashCardBasicFour();
+//     });
+
+// };
+
+
+// Start the Chain of inquirer Functions starting from cardOne
+flashCardBasicOne();
+
+
+// Create instances from ClozeCard Constructor && set parameters
+var clozeOne = new ClozeCard("George Washington was the First President of the United States", "George Washington");
+
+// Testing ClozeCard Construct -WORKING!
+console.log(clozeOne.fullText);
+console.log(clozeOne.cloze);
+console.log(clozeOne.partial);
 
 
 // inquirer.prompt([
